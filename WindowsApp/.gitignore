@@ -1,0 +1,28 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+
+# Files built by Visual Studio
+*.exe
+*.dll
+*.pdb
+*.cache
+
+# NuGet Packages
+*.nupkg
+packages/
+
+# MSBuild log
+msbuild.log
+
+# Temporary files
+*.tmp

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSI Installer Helper - Web App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔧 MSI Installer Helper</h1>
+            <p class="subtitle">Analyze and extract MSI installation files</p>
+        </header>
+
+        <main>
+            <section class="upload-section">
+                <div class="upload-box" id="uploadBox">
+                    <div class="upload-icon">📦</div>
+                    <h2>Upload MSI File</h2>
+                    <p>Drag and drop your MSI file here or click to browse</p>
+                    <input type="file" id="fileInput" accept=".msi" style="display: none;">
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        Choose File
+                    </button>
+                </div>
+                <div id="fileName" class="file-name"></div>
+            </section>
+
+            <section class="actions-section" id="actionsSection" style="display: none;">
+                <h2>Available Actions</h2>
+                <div class="action-buttons">
+                    <button class="btn btn-success" id="analyzeBtn">
+                        <span class="btn-icon">🔍</span>
+                        Analyze MSI
+                    </button>
+                    <button class="btn btn-info" id="extractBtn">
+                        <span class="btn-icon">📂</span>
+                        Extract Files
+                    </button>
+                    <button class="btn btn-warning" id="instructionsBtn">
+                        <span class="btn-icon">📋</span>
+                        Get Install Instructions
+                    </button>
+                </div>
+            </section>
+
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>Results</h2>
+                <div class="results-box">
+                    <div id="loadingSpinner" class="spinner" style="display: none;">
+                        <div class="spinner-border"></div>
+                        <p>Processing MSI file...</p>
+                    </div>
+                    <div id="resultsContent"></div>
+                </div>
+            </section>
+
+            <section class="info-section">
+                <h2>About This Tool</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>📊 Analyze</h3>
+                        <p>View MSI package information including product name, version, manufacturer, and installation properties.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📦 Extract</h3>
+                        <p>Extract all files from the MSI package to review contents without installing.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📝 Instructions</h3>
+                        <p>Get detailed file placement instructions for manual installation without admin privileges.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="how-to-section">
+                <h2>How to Use</h2>
+                <ol>
+                    <li><strong>Upload</strong> - Select or drag an MSI file</li>
+                    <li><strong>Choose Action</strong> - Analyze, extract, or get installation instructions</li>
+                    <li><strong>Review Results</strong> - View the analysis or download extracted files</li>
+                    <li><strong>Manual Install</strong> - Follow the provided instructions to place files manually</li>
+                </ol>
+            </section>
+
+            <section class="windows-app-section">
+                <h2>Windows Desktop Application</h2>
+                <div class="windows-app-box">
+                    <p>For direct MSI installation with admin privileges, download our Windows desktop application.</p>
+                    <div class="features-list">
+                        <ul>
+                            <li>✅ Install MSI files with automatic admin elevation</li>
+                            <li>✅ Extract and analyze MSI packages locally</li>
+                            <li>✅ Get detailed file placement instructions</li>
+                            <li>✅ Works offline on Windows 10/11</li>
+                        </ul>
+                    </div>
+                    <p class="download-note">
+                        <strong>Note:</strong> The Windows application is located in the <code>WindowsApp/</code> directory. 
+                        Build it using Visual Studio or <code>dotnet build</code> on Windows.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 MSI Installer Helper | Open Source Tool</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
