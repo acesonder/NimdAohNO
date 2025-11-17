@@ -4,10 +4,20 @@ const path = require('path');
 const fs = require('fs');
 const { exec, spawn } = require('child_process');
 const util = require('util');
+const rateLimit = require('express-rate-limit');
 const execPromise = util.promisify(exec);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Configure rate limiting to prevent abuse
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 10, // Limit each IP to 10 requests per windowMs
+    message: 'Too many requests from this IP, please try again later.',
+    standardHeaders: true,
+    legacyHeaders: false,
+});
 
 // Create uploads and extracts directories
 const uploadsDir = path.join(__dirname, '../uploads');
@@ -58,7 +68,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // Analyze MSI file endpoint
-app.post('/api/analyze', upload.single('msiFile'), async (req, res) => {
+app.post('/api/analyze', apiLimiter, upload.single('msiFile'), async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'No file uploaded' });
     }
@@ -165,7 +175,7 @@ app.post('/api/analyze', upload.single('msiFile'), async (req, res) => {
 });
 
 // Extract MSI file endpoint
-app.post('/api/extract', upload.single('msiFile'), async (req, res) => {
+app.post('/api/extract', apiLimiter, upload.single('msiFile'), async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'No file uploaded' });
     }
@@ -234,7 +244,7 @@ app.post('/api/extract', upload.single('msiFile'), async (req, res) => {
 });
 
 // Get installation instructions endpoint
-app.post('/api/instructions', upload.single('msiFile'), async (req, res) => {
+app.post('/api/instructions', apiLimiter, upload.single('msiFile'), async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'No file uploaded' });
     }

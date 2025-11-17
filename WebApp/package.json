@@ -8,11 +8,17 @@
     "dev": "node server/server.js",
     "test": "echo \"No tests specified\""
   },
-  "keywords": ["msi", "installer", "windows", "extractor"],
+  "keywords": [
+    "msi",
+    "installer",
+    "windows",
+    "extractor"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "express": "^4.21.1",
+    "express-rate-limit": "^8.2.1",
     "multer": "^2.0.0-rc.4"
   },
   "engines": {
